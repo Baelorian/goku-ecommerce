@@ -1,10 +1,8 @@
 package goku.ecommerce.gokuecommerce.entity;
 
 import lombok.Data;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -12,9 +10,9 @@ import java.io.Serializable;
 @Data
 public class Users implements Serializable {
 
-
     @Id
     @Column(name ="id", unique =true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
     @Column(name ="name", nullable = false)
