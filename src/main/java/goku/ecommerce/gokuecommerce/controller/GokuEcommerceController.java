@@ -2,25 +2,37 @@ package goku.ecommerce.gokuecommerce.controller;
 
 import goku.ecommerce.gokuecommerce.entity.Users;
 import goku.ecommerce.gokuecommerce.repository.UserRepository;
+import goku.ecommerce.gokuecommerce.service.GokuEcommerceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@Slf4j
 public class GokuEcommerceController {
 
     @Autowired
     private UserRepository UserRepository;
 
+    @Autowired
+    private GokuEcommerceService GokuEcommerceService;
+
     @GetMapping(path = "/teste")
+    @Cacheable("teste")
     public String teste() {
+        log.info("OK");
         return "Ok";
     }
 
     @GetMapping(path = "/api/user/{userid}")
+    @Cacheable("getUser")
     public ResponseEntity getUser (@PathVariable("userid") Integer userid){
         return UserRepository.findById(userid)
                 .map(record -> ResponseEntity.ok().body(record))
@@ -28,14 +40,16 @@ public class GokuEcommerceController {
     }
 
     @GetMapping(path = "/api/user/cep/{cep}")
-    public ResponseEntity<Page<Users>> getUserByCep (@PathVariable("cep") String cep){
-        Page<Users> UserByCep = UserRepository.findByCep(cep, Pageable.unpaged());
-        return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(UserByCep);
+    @Cacheable("UserByCep")
+    public ResponseEntity<List<Users>> getUserByCep (@PathVariable("cep") String cep){
+        List<Users> UserByCep = UserRepository.findByCep(cep);
+        return ResponseEntity.status(HttpStatus.OK).body(UserByCep);
     }
 
     @PostMapping(path = "/api/users/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Users setUsers(@RequestBody Users users){
+        GokuEcommerceService.FindDuplicity(users);
         return UserRepository.save(users);
     }
 
