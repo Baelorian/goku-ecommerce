@@ -19,13 +19,19 @@ public class GokuEcommerceService {
     private UserRepository UserRepository;
 
 
-    public Users FindDuplicity(Users user){
-        String aseas = UserRepository.findDocumentDuplicity(user.getDocument());
-            log.info("FindDuplicity(): User: {}", user);
-            if (!aseas.isEmpty()){
-                log.error("FindDuplicity(): Document Duplicity {}", aseas);
+    public Users FindDuplicityAndInvalid(Users user){
+        String document = UserRepository.findDocumentDuplicity(user.getDocument());
+            log.info("FindDuplicityAndInvalid(): User: {}", user);
+            if (document != null){
+                log.error("FindDuplicityAndInvalid(): Document Duplicity {}", document);
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This document has already been registered");
             }
+            if(user.getDocument().length() !=11 && user.getDocument().length() !=14){
+                //TODO: ADIÇÃO DE UMA API PARA VALIDAÇÃO DE CPF E CNPJ REAL
+                log.error("FindDuplicityAndInvalid(): Invalid Document {}", user.getDocument());
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This document is not valid");
+            }
+
         return user;
     }
 

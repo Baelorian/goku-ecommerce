@@ -47,10 +47,10 @@ public class GokuEcommerceController {
     }
 
     @PostMapping(path = "/api/users/save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Users setUsers(@RequestBody Users users){
-        GokuEcommerceService.FindDuplicity(users);
-        return UserRepository.save(users);
+    public ResponseEntity<Users>  setUsers(@RequestBody Users users){
+        GokuEcommerceService.FindDuplicityAndInvalid(users);
+        UserRepository.save(users);
+        return ResponseEntity.status(HttpStatus.CREATED).body(users);
     }
 
 }
