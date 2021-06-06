@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "3c0959e7-a437-4af0-987e-cb0a47155adc",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Teste",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/teste",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"teste"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Localizar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"Rafael Santos\",\r\n    \"phone\":\"71987304063\",\r\n    \"adress\":\"Alameda das Nacoes\",\r\n    \"cep\":\"41350340\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/users/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Localizar Pelo Cep",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/user/cep/41350340",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"cep",
+						"41350340"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
