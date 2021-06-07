@@ -24,10 +24,16 @@
 			"response": []
 		},
 		{
-			"name": "Localizar",
+			"name": "Localizar Pelo Id",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "authorization",
+						"value": "\"123456\"",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:8080/api/user/1",
 					"host": [
@@ -44,39 +50,16 @@
 			"response": []
 		},
 		{
-			"name": "Cadastrar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"Rafael Santos\",\r\n    \"phone\":\"71987304063\",\r\n    \"adress\":\"Alameda das Nacoes\",\r\n    \"cep\":\"41350340\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/api/users/save",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"users",
-						"save"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Localizar Pelo Cep",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "\"123456\"",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:8080/api/user/cep/41350340",
 					"host": [
@@ -88,6 +71,89 @@
 						"user",
 						"cep",
 						"41350340"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "\"123456\"",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Frederico Pitoco\",\r\n    \"document\":\"31589712587\",\r\n    \"phone\":\"999\",\r\n    \"adress\":\"Alameda das Nacoes\",\r\n    \"cep\":\"41350340\",\r\n    \"password\":\"123456\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/login?identifier=31589712587&password=123456",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "identifier",
+							"value": "31589712587"
+						},
+						{
+							"key": "password",
+							"value": "123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "\"123456\"",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Frederico Pitoco\",\r\n    \"document\":\"31589712184\",\r\n    \"phone\":\"999\",\r\n    \"adress\":\"Alameda das Nacoes\",\r\n    \"cep\":\"41350340\",\r\n    \"password\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/users/save?",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"save"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
 					]
 				}
 			},

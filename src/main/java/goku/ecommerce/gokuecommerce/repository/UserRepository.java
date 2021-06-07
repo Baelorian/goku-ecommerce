@@ -19,5 +19,11 @@ public interface UserRepository extends JpaRepository <Users, Integer> {
     String findDocumentDuplicity(
                     @Param(value = "document") String document);
 
+    @Query(value ="SELECT o.document FROM Users o WHERE o.document = :document AND o.password =:password")
+    String Login(
+            @Param(value = "document") String document,
+            @Param(value = "password") String password);
+
+
 
 }

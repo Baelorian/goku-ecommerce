@@ -29,4 +29,9 @@ public class Users implements Serializable {
 
     @Column(name ="cep", nullable = false)
     public String cep;
+
+    @Column(name ="password", nullable = false)
+    public String password;
+
+
 }
